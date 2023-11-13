@@ -399,6 +399,7 @@ class CLIPPreTrainedModel(PreTrainedModel):
     config_class = CLIPConfig
     base_model_prefix = "clip"
     supports_gradient_checkpointing = True
+    _no_split_modules = ["CLIPTextEmbeddings", "CLIPEncoderLayer"]
 
     def _init_weights(self, module):
         """Initialize the weights"""
@@ -750,8 +751,6 @@ class CLIPTextTransformer(nn.Module):
 )
 class CLIPTextModel(CLIPPreTrainedModel):
     config_class = CLIPTextConfig
-
-    _no_split_modules = ["CLIPTextEmbeddings", "CLIPEncoderLayer"]
 
     def __init__(self, config: CLIPTextConfig):
         super().__init__(config)
@@ -1155,8 +1154,6 @@ class CLIPModel(CLIPPreTrainedModel):
 )
 class CLIPTextModelWithProjection(CLIPPreTrainedModel):
     config_class = CLIPTextConfig
-
-    _no_split_modules = ["CLIPTextEmbeddings", "CLIPEncoderLayer"]
 
     def __init__(self, config: CLIPTextConfig):
         super().__init__(config)
